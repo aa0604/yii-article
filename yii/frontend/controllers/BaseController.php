@@ -12,8 +12,8 @@ class BaseController extends \yii\web\Controller
 
     public function init()
     {
-        $this->user = User::getTokenToUser();
-        $this->userId = $this->user->userid ?? null;
+        $this->user = Yii::$app->user->identity;
+        $this->userId = Yii::$app->user->getId();;
         parent::init();
     }
 
