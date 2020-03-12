@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use xing\article\models\Article;
 
 /**
- * ArticleSearch represents the model behind the search form of `common\models\article\Article`.
+ * ArticleSearch represents the model behind the search form of `xing\article\models\Article`.
  */
 class ArticleSearch extends Article
 {

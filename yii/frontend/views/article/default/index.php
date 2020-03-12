@@ -14,7 +14,7 @@ $this->metaTags[] = '<meta name="description" content="交友微信群网，专�
                 <ul style="margin-top: 0px;">
                     <li><a href="/">我们专注于交友微信群</a></li>
 
-                    <?php foreach (\xing\article\logic\ArticleLogic::getList(\xing\article\map\ArticleCategoryMap::$newCategoryId, 3) as $article) {?>
+                    <?php foreach (\xing\article\logic\ArticleLogic::getList(\xing\article\map\CategoryMap::$newCategoryId, 3) as $article) {?>
                     <li><span class="mr10"></span><a href="<?= $article->url ?>" style="font-style: normal;"><?= $article->regionTitle ?></a></li>
                     <?php } ?>
 

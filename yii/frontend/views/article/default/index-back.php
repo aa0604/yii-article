@@ -75,7 +75,7 @@
 
                 <a class="btn btn-secondary" href="javascript:openAndroid()">安卓版下载</a>
 
-                <a class="btn btn-transparent" href="<?= \xing\article\logic\ArticleUrlLogic::categoryDirByUrl(\xing\article\map\ArticleCategoryMap::$newCategoryDir) ?>" title="征婚交友资讯">征婚交友资讯</a>
+                <a class="btn btn-transparent" href="<?= \xing\article\logic\ArticleUrlLogic::categoryDirByUrl(\xing\article\map\CategoryMap::$newCategoryDir) ?>" title="征婚交友资讯">征婚交友资讯</a>
 
                 <a class="btn btn-transparent" href="#" title="登陆/注册">登陆/注册</a>
 
@@ -211,7 +211,7 @@
 
                 <h6 class="pb-3">蛙朋资讯</h6>
 
-                <?php foreach (\xing\article\logic\ArticleLogic::getList(\xing\article\map\ArticleCategoryMap::$newCategoryId, 3) as $article) {?>
+                <?php foreach (\xing\article\logic\ArticleLogic::getList(\xing\article\map\CategoryMap::$newCategoryId, 3) as $article) {?>
                     <p class="mbr-text"><a href="<?= \xing\article\logic\ArticleUrlLogic::articleUrl($article->articleId)?>" style="font-style: normal;"><?= $article->title ?></a></p>
                 <?php } ?>
             </div>

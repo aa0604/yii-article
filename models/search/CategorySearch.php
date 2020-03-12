@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use xing\article\models\Category;
 
 /**
- * ArticleCategorySearch represents the model behind the search form of `common\models\article\ArticleCategory`.
+ * CategorySearch represents the model behind the search form of `xing\article\models\Category`.
  */
 class CategorySearch extends Category
 {

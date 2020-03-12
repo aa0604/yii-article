@@ -29,7 +29,7 @@ trait ArticleFrontendTrait
     {
         try {
 
-            $catDir = \xing\article\logic\ArticleCategoryLogic::getCurrentCategoryDir();
+            $catDir = \xing\article\logic\CategoryLogic::getCurrentCategoryDir();
             $category = Category::dirByCategory($catDir);
             if (empty($category)) throw new \Exception('没有这个栏目');
 
@@ -49,7 +49,7 @@ trait ArticleFrontendTrait
             $article = Article::readInfo($articleId);
             if (empty($article)) throw new \Exception('没有这篇文章');
 
-            $catDir = \xing\article\logic\ArticleCategoryLogic::getCurrentCategoryDir();
+            $catDir = \xing\article\logic\CategoryLogic::getCurrentCategoryDir();
             $category = Category::dirByCategory($catDir);
             if (empty($category)) throw new \Exception('没有这个栏目');
 

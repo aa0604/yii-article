@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use xing\article\models\ArticleRecommend;
 
 /**
- * ArticleRecommendSearch represents the model behind the search form of `common\models\article\ArticleRecommend`.
+ * ArticleRecommendSearch represents the model behind the search form of `xing\article\models\ArticleRecommend`.
  */
 class ArticleRecommendSearch extends ArticleRecommend
 {

@@ -9,7 +9,7 @@
 namespace xing\article\map;
 
 
-class ArticleCategoryMap
+class CategoryMap
 {
 
     // 栏目模板

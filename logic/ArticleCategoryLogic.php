@@ -11,7 +11,7 @@ namespace xing\article\logic;
 use xing\article\models\Category;
 use Yii;
 
-class ArticleCategoryLogic
+class CategoryLogic
 {
 
     /**
