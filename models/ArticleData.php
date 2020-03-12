@@ -1,6 +1,6 @@
 <?php
 
-namespace xing\article\modules\article;
+namespace xing\article\models;
 
 use Yii;
 
@@ -12,7 +12,7 @@ use Yii;
  *
  * @property Article $article
  */
-class ArticleData extends BaseActiveModel
+class ArticleData extends \xing\helper\yii\BaseActiveModel
 {
 
     /**

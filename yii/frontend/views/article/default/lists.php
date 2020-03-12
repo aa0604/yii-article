@@ -1,9 +1,9 @@
 <?php
 /**
  *
- * @var \xing\article\modules\article\Article $article
+ * @var \xing\article\models\Article $article
  * @var string $catDir
- * @var \xing\article\modules\article\Category $category
+ * @var \xing\article\models\Category $category
  * @throws \Exception
  */
 
@@ -18,7 +18,7 @@ use xing\article\logic\ArticleLogic;
         <?php foreach (ArticleLogic::getDataProvider(15) as $article) { ?>
             <div class="post ption_r">
                 <div class="circle">
-                    <div class="type"><?=date('d', $article->createTime)?><small><?=date('m', $article->createTime)?>月</small></div>
+                    <div class="type"><?=date('d', strtotime($article->createTime))?><small><?=date('m', $article->createTime)?>月</small></div>
                 </div>
                 <h3 class="post_title fs24 f_w"><a href="<?=$article->url?>" rel="bookmark" class="dq"><?= $article->regionTitle ?></a></h3>
                 <div class="meta">
@@ -27,7 +27,7 @@ use xing\article\logic\ArticleLogic;
                                                                                                                   class="attachment-post-thumbnail wp-post-image"
                                                                                                                   alt="<?= $article->keywords ?>"/></a>
                     </div>
-                    <p class="meta_info"><span class="mr10">时间: <?=date('Y年m月d日', $article->createTime)?> </span> <span class="mr10">所属分类: <a href="<?=$article->category->url?>" rel="category tag" class="dq"><?=$article->category->name?></a> </span> <span class="mr10">人气<?=$article->articleView->all?></span>
+                    <p class="meta_info"><span class="mr10">时间: <?=date('Y年m月d日', strtotime($article->createTime))?> </span> <span class="mr10">所属分类: <a href="<?=$article->category->url?>" rel="category tag" class="dq"><?=$article->category->name?></a> </span> <span class="mr10">人气<?=$article->articleView->all?></span>
                     </p>
                     <p class="meta_content"><?=\xing\article\logic\ArticleLogic::strCut($article->articleData->content)?></p>
                     <p><a class="more_link" href="<?=$article->url?>"><em>Read more >></em></a></p>
@@ -41,7 +41,7 @@ use xing\article\logic\ArticleLogic;
         <div class="post ption_r">
             <div id="page_nav">
                 <div class='wp-pagenavi'>
-                    <?= \yii\widgets\LinkPager::widget(['pagination' => \xing\article\modules\article\Article::getPagination()]); ?>
+                    <?= \yii\widgets\LinkPager::widget(['pagination' => \xing\article\models\Article::getPagination()]); ?>
                 </div>
             </div>
             <div class="clear"></div>

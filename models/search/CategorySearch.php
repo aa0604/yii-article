@@ -1,16 +1,16 @@
 <?php
 
-namespace xing\article\modules\article\search;
+namespace xing\article\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use xing\article\modules\article\ArticleData;
+use xing\article\models\Category;
 
 /**
- * ArticleDataSearch represents the model behind the search form of `common\models\article\ArticleData`.
+ * ArticleCategorySearch represents the model behind the search form of `common\models\article\ArticleCategory`.
  */
-class ArticleDataSearch extends ArticleData
+class CategorySearch extends Category
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ArticleDataSearch extends ArticleData
     public function rules()
     {
         return [
-            [['articleId'], 'integer'],
-            [['content'], 'safe'],
+            [['categoryId', 'parentId', 'sorting', 'createTime', 'updateTime'], 'integer'],
+            [['name', 'childrenIds', 'image', 'display'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ArticleDataSearch extends ArticleData
      */
     public function search($params)
     {
-        $query = ArticleData::find();
+        $query = Category::find();
         $order = [];
         if (isset($params['sort']) && !empty($params['sort'])) {
             $order = $params['sort'];
@@ -68,10 +68,17 @@ class ArticleDataSearch extends ArticleData
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'articleId' => $this->articleId,
+            'categoryId' => $this->categoryId,
+            'parentId' => $this->parentId,
+            'sorting' => $this->sorting,
+            'createTime' => $this->createTime,
+            'updateTime' => $this->updateTime,
         ]);
 
-        $query->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'childrenIds', $this->childrenIds])
+            ->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'display', $this->display]);
 
         return $dataProvider;
     }

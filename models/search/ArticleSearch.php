@@ -1,11 +1,11 @@
 <?php
 
-namespace xing\article\modules\article\search;
+namespace xing\article\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use xing\article\modules\article\Article;
+use xing\article\models\Article;
 
 /**
  * ArticleSearch represents the model behind the search form of `common\models\article\Article`.

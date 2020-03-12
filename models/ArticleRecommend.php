@@ -1,6 +1,6 @@
 <?php
 
-namespace xing\article\modules\article;
+namespace xing\article\models;
 
 use Yii;
 
@@ -12,7 +12,7 @@ use Yii;
  * @property int $createTime 创建时间
  * @property int $updateTime 修改时间
  */
-class ArticleRecommend extends BaseActiveModel
+class ArticleRecommend extends \xing\helper\yii\BaseActiveModel
 {
 
     /**

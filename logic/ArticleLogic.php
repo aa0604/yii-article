@@ -10,10 +10,10 @@ namespace xing\article\logic;
 
 
 use xing\helper\exception\ModelYiiException;
-use xing\article\modules\article\Article;
-use xing\article\modules\article\Category;
-use xing\article\modules\article\ArticleView;
-use xing\article\modules\article\search\ArticleSearch;
+use xing\article\models\Article;
+use xing\article\models\Category;
+use xing\article\models\ArticleView;
+use xing\article\models\search\ArticleSearch;
 use xing\helper\text\StringHelper;
 use Yii;
 
@@ -85,7 +85,7 @@ class ArticleLogic
 
     public static function getArticleModel($model)
     {
-        $class = '\xing\article\modules\article\Article' . ucwords($model);
+        $class = '\xing\article\models\Article' . ucwords($model);
         return new $class();
     }
 

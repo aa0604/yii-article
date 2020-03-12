@@ -10,12 +10,13 @@ namespace xing\article\yii\frontend\controllers;
 
 use xing\helper\exception\ModelYiiException;
 use xing\article\logic\TemplateLogic;
-use xing\article\modules\article\Article;
+use xing\article\models\Article;
 use Yii;
-use xing\article\modules\article\Category;
+use xing\article\models\Category;
 
-trait ArticleBaseController
+trait ArticleFrontendTrait
 {
+
 
     public function actionIndex()
     {
@@ -59,5 +60,22 @@ trait ArticleBaseController
         } catch (\Exception $e) {
             $this->showError($e);
         }
+    }
+
+    /**
+     * @param \Exception $e
+     */
+    public function showError($e)
+    {
+        if (YII_DEBUG) {
+            throw $e;
+        } else {
+            exit($e->getMessage());
+        }
+    }
+
+    public function actionError()
+    {
+        exit('出错了');
     }
 }

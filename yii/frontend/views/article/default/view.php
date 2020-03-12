@@ -3,7 +3,7 @@
  *
  * @throws \Exception
  * @var string $catDir
- * @var \xing\article\modules\article\Article $article
+ * @var \xing\article\models\Article $article
  */
 use xing\article\logic\ArticleLogic;
 use xing\article\modules\site\logic\SiteRegionLogic;
@@ -19,7 +19,7 @@ $this->metaTags[] = '<meta name="description" content="交友微信群网，专�
             <div class="circle">
                 <div class="single_type" class="archives_date"></div>
             </div>
-            <div class="date"> <?= date('d', $article->createTime) ?> <small><?= date('m', $article->createTime) ?>月</small></div>
+            <div class="date"> <?= date('d', strtotime($article->createTime)) ?> <small><?= date('m', $article->createTime) ?>月</small></div>
             <h1 class="post_title fs24 f_w"><?= $article->regionTitle ?></h1>
             <div class="meta">
                 <div class="meta_info">

@@ -1,6 +1,6 @@
 <?php
 
-namespace xing\article\modules\article;
+namespace xing\article\models;
 
 use xing\helper\exception\ModelYiiException;
 use Yii;
@@ -19,7 +19,7 @@ use Yii;
  *
  * @property Article $article
  */
-class ArticleView extends BaseActiveModel
+class ArticleView extends \xing\helper\yii\BaseActiveModel
 {
 
     /**

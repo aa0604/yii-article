@@ -1,6 +1,7 @@
 {
     "name": "xing.chen/article",
     "description": "文章系统",
+    "type": "yii2-extension",
     "license": "mit",
     "authors": [
         {

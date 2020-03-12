@@ -3,7 +3,7 @@
  *
  * @throws \Exception
  *@var string $catDir
- * @var \xing\article\modules\article\Category $category
+ * @var \xing\article\models\Category $category
  * @var \xing\article\modules\group\Group $group
  */
 

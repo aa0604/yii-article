@@ -8,7 +8,7 @@
 
 namespace xing\article\logic;
 
-use xing\article\modules\article\Category;
+use xing\article\models\Category;
 use Yii;
 
 class ArticleCategoryLogic

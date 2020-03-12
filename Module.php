@@ -1,19 +1,19 @@
 <?php
 
-namespace xing\article\yii;
+namespace xing\article;
 
 /**
- * Article module definition class
+ * article module definition class
  */
 class Module extends \yii\base\Module
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public $controllerNamespace = 'xing\article\yii\frontend\controllers';
+    public $controllerNamespace = 'apps\backend\modules\article\controllers';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {

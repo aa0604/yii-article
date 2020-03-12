@@ -1,6 +1,6 @@
 <?php
 
-namespace xing\article\modules\article;
+namespace xing\article\models;
 
 use xing\article\logic\ArticleUrlLogic;
 use Yii;
@@ -18,8 +18,8 @@ use Yii;
  * @property int $sorting 排序
  * @property int $allowComment 是否允许评论，1是0否
  * @property string $url 指定链接
- * @property int $createTime 创建时间
- * @property int $updateTime 修改时间
+ * @property string $createTime 创建时间
+ * @property string $updateTime 修改时间
  *
  * @property string $regionTitle 地域站标题
  *
@@ -27,7 +27,7 @@ use Yii;
  * @property ArticleData $articleData
  * @property ArticleView $articleView
  */
-class Article extends BaseActiveModel
+class Article extends \xing\helper\yii\BaseActiveModel
 {
 
     public $regionTitle;
@@ -45,7 +45,7 @@ class Article extends BaseActiveModel
     public function rules()
     {
         return [
-            [['categoryId', 'sorting', 'allowComment', 'createTime', 'updateTime', 'type'], 'integer'],
+            [['categoryId', 'type'], 'integer'],
             [['title'], 'string', 'max' => 300],
             [['keywords'], 'string', 'max' => 100],
             [['description', 'url'], 'string', 'max' => 500],

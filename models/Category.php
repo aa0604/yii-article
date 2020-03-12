@@ -1,6 +1,6 @@
 <?php
 
-namespace xing\article\modules\article;
+namespace xing\article\models;
 
 use xing\article\logic\ArticleUrlLogic;
 use Yii;
@@ -27,7 +27,7 @@ use Yii;
  *
  * @property Article[] $articles
  */
-class Category extends BaseActiveModel
+class Category extends \xing\helper\yii\BaseActiveModel
 {
 
     public $regionName;
