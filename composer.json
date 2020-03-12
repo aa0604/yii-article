@@ -1,0 +1,20 @@
+{
+    "name": "xing.chen/article",
+    "description": "文章系统",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "chen xing",
+            "email": "877349686@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "xing.chen/helper": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "xing\\article\\": ""
+        }
+    }
+}
