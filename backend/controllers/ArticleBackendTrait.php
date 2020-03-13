@@ -1,6 +1,6 @@
 <?php
 
-namespace xing\article\yii\backend\controllers;
+namespace xing\article\backend\controllers;
 
 use Yii;
 use xing\article\models\Article;
@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 trait ArticleBackendTrait
 {
 
+    public $viewPath = '@vendor/xing.chen/article/yii/backend/views/article/';
     /**
      * @inheritdoc
      */
@@ -36,7 +37,7 @@ trait ArticleBackendTrait
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render($this->viewPath . 'index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -50,13 +51,13 @@ trait ArticleBackendTrait
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->render($this->viewPath . 'view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * @return string|\yii\web\Response
+     * @return string|\web\Response
      * @throws \Exception
      */
     public function actionCreate()
@@ -69,6 +70,7 @@ trait ArticleBackendTrait
             try {
 
                 $model->load(Yii::$app->request->post());
+                $model->createTime = date('Y-m-d H:i:s');
                 if (!$model->save()) throw new \Exception('保存失败');
 
                 $articleData = new ArticleData();
@@ -85,17 +87,17 @@ trait ArticleBackendTrait
             }
         }
 
-        return $this->render('create', [
+        return $this->render($this->viewPath . 'create', [
             'model' => $model,
         ]);
     }
 
     /**
      * @param $id
-     * @return string|\yii\web\Response
+     * @return string|\web\Response
      * @throws NotFoundHttpException
      * @throws \Exception
-     * @throws \yii\db\Exception
+     * @throws \db\Exception
      */
     public function actionUpdate($id)
     {
@@ -107,6 +109,7 @@ trait ArticleBackendTrait
             try {
 
                 $model->load(Yii::$app->request->post());
+                $model->updateTime = date('Y-m-d H:i:s');
                 if (!$model->save()) throw new \Exception('保存失败');
 
                 $articleData = ArticleData::findOne($model->articleId);
@@ -127,7 +130,7 @@ trait ArticleBackendTrait
             // return $this->redirect(['view', 'id' => $model->articleId]);
         }
 
-        return $this->render('update', [
+        return $this->render($this->viewPath . 'update', [
             'model' => $model,
         ]);
     }

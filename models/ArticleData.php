@@ -12,7 +12,7 @@ use Yii;
  *
  * @property Article $article
  */
-class ArticleData extends \xing\helper\yii\BaseActiveModel
+class ArticleData extends \xing\helper\BaseActiveModel
 {
 
     /**
@@ -49,7 +49,7 @@ class ArticleData extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return \db\ActiveQuery
      */
     public function getArticle()
     {

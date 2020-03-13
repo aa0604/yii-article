@@ -64,7 +64,7 @@ class ArticleLogic
      * @param int $number
      * @param null $categoryId
      * @param null $page
-     * @return $this[]|array|\yii\db\ActiveRecord[]
+     * @return $this[]|array|\db\ActiveRecord[]
      * @throws \Exception
      */
     public static function getDataProvider($number = 20, $categoryId = null, $page = null)
@@ -95,7 +95,7 @@ class ArticleLogic
      * @param $number
      * @param array $sort
      * @param null $recommendId
-     * @return Article[]|array|\yii\db\ActiveRecord[]
+     * @return Article[]|array|\db\ActiveRecord[]
      */
     public static function getList($categoryId = null, $number = 20, $sort = ['articleId' => SORT_DESC], $recommendId = null)
     {

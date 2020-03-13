@@ -27,7 +27,7 @@ use Yii;
  * @property ArticleData $articleData
  * @property ArticleView $articleView
  */
-class Article extends \xing\helper\yii\BaseActiveModel
+class Article extends \xing\helper\BaseActiveModel
 {
 
     public $regionTitle;
@@ -76,7 +76,7 @@ class Article extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return \db\ActiveQuery
      */
     public function getCategory()
     {
@@ -84,7 +84,7 @@ class Article extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return \db\ActiveQuery
      */
     public function getArticleData()
     {
@@ -92,7 +92,7 @@ class Article extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return \db\ActiveQuery
      */
     public function getArticleView()
     {

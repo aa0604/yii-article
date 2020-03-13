@@ -35,7 +35,7 @@ $footerContent = '<p>群里都是附近的人，定期举行活动，有效应�
             <div class="box_content r_comments">
                 <ul id="rcslider">
                     <?php foreach (GroupUserLogic::region2list($siteRegion->regionId ?? 0) as $v) {?>
-                        <li><img src='<?=\xing\article\modules\site\logic\UploadLogic::getDataUrl($v['avatar'])?>' class='avatar avatar-32 photo' height='32' width='32'/>
+                        <li><img src='<?=\xing\upload\UploadYiiLogic::getDataUrl($v['avatar'])?>' class='avatar avatar-32 photo' height='32' width='32'/>
                             <?=$v['nickname']?> <?=$v['sex'] ? '男' : '女'?> <?=substr($v['birthDay'], 2, 2)?>年
                             <br class="dq">
                             加入时间：<?=$v['joinTime']?>

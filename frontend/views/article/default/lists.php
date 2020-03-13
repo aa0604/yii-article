@@ -41,7 +41,7 @@ use xing\article\logic\ArticleLogic;
         <div class="post ption_r">
             <div id="page_nav">
                 <div class='wp-pagenavi'>
-                    <?= \yii\widgets\LinkPager::widget(['pagination' => \xing\article\models\Article::getPagination()]); ?>
+                    <?= \widgets\LinkPager::widget(['pagination' => \xing\article\models\Article::getPagination()]); ?>
                 </div>
             </div>
             <div class="clear"></div>

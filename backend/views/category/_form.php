@@ -23,14 +23,14 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'parentId')->dropDownList(\xing\article\models\Category::dropDownTrue(0, true),['value' => $model->parentId ?: '0']) ?>
+        <?= $form->field($model, 'parentId')->dropDownList(\xing\article\models\Category::dropDownTrue(0, true),['value' => $model->parentId ?: '0', 'prompt' => '作为一级栏目']) ?>
         <?= $form->field($model, 'dir')->textInput(['maxlength' => true]) ?>
 
         <?=$form->field($model, 'image')->widget('xing\webuploader\yii2\FileInput')?>
 
-        <?= $form->field($model, 'categoryTemplate')->dropDownList(\common\map\article\CategoryMap::$categoryTemplate) ?>
+        <?= $form->field($model, 'categoryTemplate')->dropDownList(\xing\article\map\CategoryMap::$categoryTemplate) ?>
 
-        <?= $form->field($model, 'articleTemplate')->dropDownList(\common\map\article\CategoryMap::$articleTemplate) ?>
+        <?= $form->field($model, 'articleTemplate')->dropDownList(\xing\article\map\CategoryMap::$articleTemplate) ?>
 
         <?= $form->field($model, 'display')->dropDownList([1 => '是', 0 => '否']) ?>
 

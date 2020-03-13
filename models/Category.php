@@ -3,6 +3,7 @@
 namespace xing\article\models;
 
 use xing\article\logic\ArticleUrlLogic;
+use xing\upload\UploadYiiLogic;
 use Yii;
 
 /**
@@ -27,7 +28,7 @@ use Yii;
  *
  * @property Article[] $articles
  */
-class Category extends \xing\helper\yii\BaseActiveModel
+class Category extends \xing\helper\BaseActiveModel
 {
 
     public $regionName;
@@ -82,7 +83,7 @@ class Category extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return \db\ActiveQuery
      */
     public function getArticles()
     {
@@ -93,7 +94,7 @@ class Category extends \xing\helper\yii\BaseActiveModel
     public function afterFind()
     {
         parent::afterFind();
-        empty($this->url) && $this->url = ArticleUrlLogic::categoryDirByUrl($this->dir);
+        (empty($this->url) && !empty($this->dir)) && $this->url = ArticleUrlLogic::categoryDirByUrl($this->dir);
     }
 
     /**
@@ -134,7 +135,7 @@ class Category extends \xing\helper\yii\BaseActiveModel
      * 读取栏目树
      * @param int $parentId
      * @param bool $bindIndex
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array|\db\ActiveRecord[]
      */
     public static function readCategoryTrue($parentId = 0, $bindIndex = false, $childrenKey = 'data')
     {
@@ -148,7 +149,7 @@ class Category extends \xing\helper\yii\BaseActiveModel
 
         # 获取子栏目：如果有下级结构，则读取下级结构，否则读取属性值
         foreach ($data as $k => $v) {
-            $data[$k]['image'] = \common\logic\UploadLogic::getDataUrl($v['image']);
+            $data[$k]['image'] = UploadYiiLogic::getDataUrl($v['image']);
             if (!empty($v['childrenIds'])) {
                 $data[$k]['data'] = static::readCategoryTrue($v['categoryId']);
             }
@@ -163,9 +164,23 @@ class Category extends \xing\helper\yii\BaseActiveModel
      */
     public static function updateAllChildren($m)
     {
-        $helper = \xing\helper\yii\ARObjectHelper::model($m);
+        $helper = \xing\helper\ARObjectHelper::model($m);
         $topId = $helper->getTopParentId('parentId', $m->categoryId);
         $helper->updateAllChildren('parentId', 'childrenIds', $topId);
+    }
+
+    /**4
+     * 读取
+     * 所有子id
+     * @param $categoryId
+     * @return string
+     * @throws \Exception
+     */
+    public static function readAllChildren($categoryId)
+    {
+        $helper = \xing\helper\ARObjectHelper::model(new self);
+        $ids = $helper->getChildren('parentId', $categoryId);
+        return $ids ? $ids . ',' . $categoryId : '';
     }
 
     /**
@@ -203,7 +218,7 @@ class Category extends \xing\helper\yii\BaseActiveModel
      * 读取栏目数据
      * @param int $parentId 从哪个栏目开始读取
      * @param int $display 是否显示
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array|\db\ActiveRecord[]
      */
     public static function readNavBar($parentId = 0, $display = 1)
     {
@@ -223,7 +238,7 @@ class Category extends \xing\helper\yii\BaseActiveModel
      * @param int $parentId 从哪个栏目开始读取
      * @param int $number 读取数据
      * @param int $display 是否显示
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array|\db\ActiveRecord[]
      */
     public static function readList($parentId = 0, $number = 20, $display = 1)
     {

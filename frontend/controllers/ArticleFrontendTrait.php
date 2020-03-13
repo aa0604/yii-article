@@ -6,7 +6,7 @@
  * Time: 23:30
  */
 
-namespace xing\article\yii\frontend\controllers;
+namespace xing\article\frontend\controllers;
 
 use xing\helper\exception\ModelYiiException;
 use xing\article\logic\TemplateLogic;

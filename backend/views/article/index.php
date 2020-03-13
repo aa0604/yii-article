@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel xing\article\models\search\ArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Articles';
+$this->title = '内容管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index form-inline">
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'title',
                 'format' => 'raw',
                 'value' => function($data) {
-        return '<a href="' . \common\logic\article\ArticleUrlLogic::articleUrl($data->articleId) . '" target="_blank">' . $data->title . '</a>';
+        return Html::a($data->title, ['update', 'id' => $data->articleId]);
                 }
             ],
             [
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'createTime:datetime',
             'updateTime:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}',],
         ],
     ]); ?>
 </div>

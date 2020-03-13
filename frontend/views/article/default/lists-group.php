@@ -33,7 +33,7 @@ $list = GroupLogic::getLists($where, $regionId, null, $order, $page);
                             <div stle="width: 100%;">
                                 <?php if (count($group['avatars']) > 3) {
                                     foreach ($group['avatars'] as $avatar) { ?>
-                                        <img src="<?=\xing\article\modules\site\logic\UploadLogic::getDataUrl($avatar)?>" style="width: 30px; height: 30px; padding: 0 1px 1px;" />
+                                        <img src="<?=\xing\upload\UploadYiiLogic::getDataUrl($avatar)?>" style="width: 30px; height: 30px; padding: 0 1px 1px;" />
                                     <?php }
                                 } else {?>
                                     <img width="130" height="130"

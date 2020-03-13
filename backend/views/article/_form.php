@@ -29,7 +29,7 @@ use xing\article\models\ArticleData;
                 <select id="categoryid" class="form-control" name="<?=$model->formName()?>[categoryId]" aria-required="true">
                     <?php
                     foreach (\xing\article\models\Category::dropDownTrue() as $categoryId => $name) {
-                        $v = \xing\article\models\Category::one($categoryId);
+                        $v = \xing\article\models\Category::findOne($categoryId);
                         ?>
                         <?php if (!empty($v->childrenIds)) { ?>
                             <optgroup label="&nbsp;&nbsp;&emsp;<?=$name?>" style="font-weight: 300;color:#ccc;"><?=$name?></optgroup>

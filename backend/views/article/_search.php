@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'categoryId')->dropDownList(\xing\article\models\Category::dropDownTrue(0, true)) ?>
+    <?= $form->field($model, 'categoryId')->dropDownList(\xing\article\models\Category::dropDownTrue(0, true), ['prompt' => '全部']) ?>
 
 
 

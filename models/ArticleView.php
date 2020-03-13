@@ -19,7 +19,7 @@ use Yii;
  *
  * @property Article $article
  */
-class ArticleView extends \xing\helper\yii\BaseActiveModel
+class ArticleView extends \xing\helper\BaseActiveModel
 {
 
     /**
@@ -60,7 +60,7 @@ class ArticleView extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return \db\ActiveQuery
      */
     public function getArticle()
     {

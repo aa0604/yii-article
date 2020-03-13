@@ -1,5 +1,5 @@
 <?php
-/* @var $this \yii\web\View */
+/* @var $this \web\View */
 use xing\article\modules\site\logic\SiteRegionLogic;
 
 $this->title = SiteRegionLogic::formatRegionName('{地名}交友微信群大全官网');

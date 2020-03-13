@@ -47,7 +47,9 @@ class ArticleUrlLogic
      */
     public static function categoryDirByUrl($catDir, $page = 1, $lan = null)
     {
-        if (empty($catDir)) throw new \Exception('栏目目录为空');
+        if (empty($catDir)) {
+            throw new \Exception('栏目目录为空');
+        }
 
         is_null($lan) && $lan = static::getByLanguage();
         $url = '/'. $lan . '/' . $catDir;

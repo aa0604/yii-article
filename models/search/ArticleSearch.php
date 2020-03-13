@@ -2,6 +2,7 @@
 
 namespace xing\article\models\search;
 
+use xing\article\models\Category;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -69,15 +70,17 @@ class ArticleSearch extends Article
         // grid filtering conditions
         $query->andFilterWhere([
             'articleId' => $this->articleId,
-            'categoryId' => $this->categoryId,
+            'type' => $this->type,
             'sorting' => $this->sorting,
             'allowComment' => $this->allowComment,
             'createTime' => $this->createTime,
             'updateTime' => $this->updateTime,
         ]);
+        
+        if (!empty($this->categoryId))
+            $query->andWhere(['categoryId' => Category::readAllChildren($this->categoryId)]);
 
-        $query->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }
