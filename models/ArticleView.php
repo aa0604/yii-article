@@ -19,7 +19,7 @@ use Yii;
  *
  * @property Article $article
  */
-class ArticleView extends \xing\helper\BaseActiveModel
+class ArticleView extends \xing\helper\yii\BaseActiveModel
 {
 
     /**

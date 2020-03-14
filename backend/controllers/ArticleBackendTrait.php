@@ -2,6 +2,7 @@
 
 namespace xing\article\backend\controllers;
 
+use xing\ueditor\UEditorTrait;
 use Yii;
 use xing\article\models\Article;
 use xing\article\models\ArticleData;
@@ -11,8 +12,9 @@ use yii\web\NotFoundHttpException;
 
 trait ArticleBackendTrait
 {
+    use UEditorTrait;
 
-    public $viewPath = '@vendor/xing.chen/article/yii/backend/views/article/';
+    public $viewPath = '@vendor/xing.chen/yii-article/backend/views/article/';
     /**
      * @inheritdoc
      */
@@ -27,6 +29,7 @@ trait ArticleBackendTrait
             ],
         ];
     }
+
 
     /**
      * Lists all article models.

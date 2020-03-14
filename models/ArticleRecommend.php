@@ -12,7 +12,7 @@ use Yii;
  * @property int $createTime 创建时间
  * @property int $updateTime 修改时间
  */
-class ArticleRecommend extends \xing\helper\BaseActiveModel
+class ArticleRecommend extends \xing\helper\yii\BaseActiveModel
 {
 
     /**

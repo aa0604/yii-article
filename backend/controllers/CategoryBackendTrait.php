@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 
 trait CategoryBackendTrait
 {
-    public $viewPath = '@vendor/xing.chen/article/yii/backend/views/category/';
+    public $viewPath = '@vendor/xing.chen/yii-article/backend/views/category/';
 
     /**
      * @inheritdoc

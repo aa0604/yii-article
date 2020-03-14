@@ -28,7 +28,7 @@ use Yii;
  *
  * @property Article[] $articles
  */
-class Category extends \xing\helper\BaseActiveModel
+class Category extends \xing\helper\yii\BaseActiveModel
 {
 
     public $regionName;
@@ -164,7 +164,7 @@ class Category extends \xing\helper\BaseActiveModel
      */
     public static function updateAllChildren($m)
     {
-        $helper = \xing\helper\ARObjectHelper::model($m);
+        $helper = \xing\helper\yii\ARObjectHelper::model($m);
         $topId = $helper->getTopParentId('parentId', $m->categoryId);
         $helper->updateAllChildren('parentId', 'childrenIds', $topId);
     }
@@ -178,7 +178,7 @@ class Category extends \xing\helper\BaseActiveModel
      */
     public static function readAllChildren($categoryId)
     {
-        $helper = \xing\helper\ARObjectHelper::model(new self);
+        $helper = \xing\helper\yii\ARObjectHelper::model(new self);
         $ids = $helper->getChildren('parentId', $categoryId);
         return $ids ? $ids . ',' . $categoryId : '';
     }

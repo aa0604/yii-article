@@ -12,7 +12,7 @@ use Yii;
  *
  * @property Article $article
  */
-class ArticleData extends \xing\helper\BaseActiveModel
+class ArticleData extends \xing\helper\yii\BaseActiveModel
 {
 
     /**

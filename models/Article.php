@@ -27,7 +27,7 @@ use Yii;
  * @property ArticleData $articleData
  * @property ArticleView $articleView
  */
-class Article extends \xing\helper\BaseActiveModel
+class Article extends \xing\helper\yii\BaseActiveModel
 {
 
     public $regionTitle;

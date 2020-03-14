@@ -52,6 +52,10 @@ use xing\article\models\ArticleData;
                 <?= \xing\ueditor\UEditor::widget([
                     'model' => ArticleData::findOne($model->articleId ?? 0) ?: new ArticleData,
                     'attribute' => 'content',
+                    'config' => [
+                        //client config @see http://fex-team.github.io/ueditor/#start-config
+                        'serverUrl' => [\yii\helpers\Url::to(['ueditor-config'])],//确保serverUrl正确指向后端地址
+                    ]
                 ]) ?>
             </div>
         </div>

@@ -12,6 +12,7 @@
     "require": {
         "php": ">=7.0.0",
         "xing.chen/helper": "~1.0",
+        "xing.chen/yii2-ueditor": "dev-master",
         "xing.chen/webuploader": "dev-master"
     },
     "autoload": {
