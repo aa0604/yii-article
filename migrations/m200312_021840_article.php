@@ -35,6 +35,8 @@ class m200312_021840_article extends Migration
             'template'     => $this->string(2000)->notNull()->comment('使用模板'),
         ], $tableOptions);
 
+        $this->addForeignKey("article_ibfk_1", "article", "categoryId", "article_category", "categoryId", "SET NULL", "CASCADE");
+        $this->addForeignKey("article_ibfk_2", "article", "recommendId", "article_recommend", "recommendId", "SET NULL", "CASCADE");
 
     }
 

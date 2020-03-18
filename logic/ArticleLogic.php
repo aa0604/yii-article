@@ -11,7 +11,7 @@ namespace xing\article\logic;
 
 use xing\helper\exception\ModelYiiException;
 use xing\article\models\Article;
-use xing\article\models\Category;
+use xing\article\models\ArticleCategory;
 use xing\article\models\ArticleView;
 use xing\article\models\search\ArticleSearch;
 use xing\helper\text\StringHelper;

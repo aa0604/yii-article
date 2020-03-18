@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model xing\article\models\Category */
+/* @var $model xing\article\models\ArticleCategory */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'parentId')->dropDownList(\xing\article\models\Category::dropDownTrue(0, true),['value' => $model->parentId ?: '0', 'prompt' => '作为一级栏目']) ?>
+        <?= $form->field($model, 'parentId')->dropDownList(\xing\article\models\ArticleCategory::dropDownTrue(0, true),['value' => $model->parentId ?: '0', 'prompt' => '作为一级栏目']) ?>
         <?= $form->field($model, 'dir')->textInput(['maxlength' => true]) ?>
 
         <?=$form->field($model, 'image')->widget('xing\webuploader\yii2\FileInput')?>

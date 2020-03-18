@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model xing\article\models\Category */
+/* @var $model xing\article\models\ArticleCategory */
 
-$this->title = '修改Article Category: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'article Categories', 'url' => ['index']];
+$this->title = '修改栏目';
+$this->params['breadcrumbs'][] = ['label' => '栏目', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->categoryId]];
 $this->params['breadcrumbs'][] = '修改';
 ?>

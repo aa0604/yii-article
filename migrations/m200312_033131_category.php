@@ -17,7 +17,7 @@ class m200312_033131_category extends Migration
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB comment "文章栏目"';
         }
-        $this->createTable('category', [
+        $this->createTable('article_category', [
             'categoryId'     => $this->primaryKey()->notNull()->comment('栏目id'),
             'name'     => $this->string(300)->notNull()->comment('栏目名称'),
             'parentId'     => $this->integer(10)->notNull()->comment('栏目上级id'),

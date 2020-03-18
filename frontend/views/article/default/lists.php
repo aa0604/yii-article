@@ -3,7 +3,7 @@
  *
  * @var \xing\article\models\Article $article
  * @var string $catDir
- * @var \xing\article\models\Category $category
+ * @var \xing\article\models\ArticleCategory $category
  * @throws \Exception
  */
 

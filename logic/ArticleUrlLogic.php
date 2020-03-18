@@ -12,7 +12,7 @@ namespace xing\article\logic;
 use xing\article\logic\LanguageLogic;
 use xing\article\map\ArticleMap;
 use xing\article\map\LanguageMap;
-use xing\article\models\Category;
+use xing\article\models\ArticleCategory;
 use xing\article\modules\site\Region;
 use xing\article\modules\site\SiteRegion;
 use xing\helper\text\ToPinYinHelper;

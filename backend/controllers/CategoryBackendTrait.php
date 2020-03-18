@@ -4,13 +4,13 @@
 namespace xing\article\backend\controllers;
 
 use Yii;
-use xing\article\models\Category;
+use xing\article\models\ArticleCategory;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 
 trait CategoryBackendTrait
 {
-    public $viewPath = '@vendor/xing.chen/yii-article/backend/views/category/';
+    public $viewPath = '@vendor/xing.chen/yii-article/backend/views/article-category/';
 
     /**
      * @inheritdoc
@@ -47,7 +47,7 @@ trait CategoryBackendTrait
      */
     public function actionIndex()
     {
-        $list = Category::dropDownTrue(0, false);
+        $list = ArticleCategory::dropDownTrue(0, false);
 
         return $this->render($this->viewPath . 'index', [
             'list' => $list,
@@ -61,7 +61,7 @@ trait CategoryBackendTrait
      */
     public function actionCreate()
     {
-        $model = new Category();
+        $model = new ArticleCategory();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Category::updateAllChildren($model);
             return $this->redirect(['index','parentId='. $model->parentId]);
@@ -83,7 +83,7 @@ trait CategoryBackendTrait
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Category::updateAllChildren($model);
+            ArticleCategory::updateAllChildren($model);
             return $this->redirect(['index','parentId='. $model->parentId]);
         } else {
             return $this->render($this->viewPath . 'update', [
@@ -115,7 +115,7 @@ trait CategoryBackendTrait
      */
     protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = ArticleCategory::findOne($id)) !== null) {
             return $model;
         }
 

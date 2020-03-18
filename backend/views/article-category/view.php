@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model xing\article\models\Category */
+/* @var $model xing\article\models\ArticleCategory */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'article Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '栏目', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-category-view">

@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'categoryId',
                 'format' => 'raw',
                 'value' => function($data) {
-                    $categoryName = \xing\article\models\Category::readByName($data->categoryId);
+                    $categoryName = \xing\article\models\ArticleCategory::readByName($data->categoryId);
                     return Html::a($categoryName, '?categoryId=' . $data->categoryId);
                 }
             ],

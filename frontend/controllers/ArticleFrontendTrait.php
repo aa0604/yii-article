@@ -12,7 +12,7 @@ use xing\helper\exception\ModelYiiException;
 use xing\article\logic\TemplateLogic;
 use xing\article\models\Article;
 use Yii;
-use xing\article\models\Category;
+use xing\article\models\ArticleCategory;
 
 trait ArticleFrontendTrait
 {

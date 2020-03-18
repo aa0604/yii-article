@@ -65,4 +65,12 @@ class ArticleData extends \xing\helper\yii\BaseActiveModel
     {
         return self::findOne($articleId)->content ?? '';
     }
+
+    public static function create($articleId, $content)
+    {
+        $m = new self;
+        $m->articleId = $articleId;
+        $m->content = $content;
+        return $m->logicSave();
+    }
 }

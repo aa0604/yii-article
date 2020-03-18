@@ -2,7 +2,7 @@
 
 namespace xing\article\models\search;
 
-use xing\article\models\Category;
+use xing\article\models\ArticleCategory;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -19,7 +19,7 @@ class ArticleSearch extends Article
     public function rules()
     {
         return [
-            [['articleId', 'categoryId', 'sorting', 'allowComment', 'createTime', 'updateTime'], 'integer'],
+            [['articleId', 'categoryId', 'sorting', 'allowComment', 'createTime', 'updateTime', 'userId', 'status'], 'integer'],
             [['type', 'title', 'content'], 'safe'],
         ];
     }
@@ -75,6 +75,8 @@ class ArticleSearch extends Article
             'allowComment' => $this->allowComment,
             'createTime' => $this->createTime,
             'updateTime' => $this->updateTime,
+            'userId' => $this->userId,
+            'status' => $this->status,
         ]);
         
         if (!empty($this->categoryId))

@@ -10,29 +10,30 @@ use Yii;
  *
  * @property int $articleId 主键自增id
  * @property int $categoryId 栏目
- * @property int $type 文章类型
+ * @property int|null $userId 发表用户
  * @property string $title 标题
- * @property string $template 文章模板
- * @property string $keywords 关键词
- * @property string $description 描述
- * @property int $sorting 排序
- * @property int $allowComment 是否允许评论，1是0否
- * @property string $url 指定链接
- * @property string $createTime 创建时间
- * @property string $updateTime 修改时间
- *
- * @property string $regionTitle 地域站标题
+ * @property int|null $type 文章类型
+ * @property int|null $status 状态：1正常 0禁止显示
+ * @property string|null $keywords 关键词
+ * @property string|null $description 描述
+ * @property int|null $sorting 排序
+ * @property string|null $model 文章模型（继承相应栏目）
+ * @property int|null $allowComment 是否允许评论，1是0否
+ * @property string|null $url 指定链接
+ * @property string|null $thumbnail 缩略图
+ * @property string|null $createTime 创建时间
+ * @property string|null $updateTime 修改时间
+ * @property string|null $template 使用模板，留空则使用栏目设置的模板
  *
  * @property Category $category
  * @property ArticleData $articleData
+ * @property User $author
  * @property ArticleView $articleView
  */
 class Article extends \xing\helper\yii\BaseActiveModel
 {
-
-    public $regionTitle;
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -40,43 +41,58 @@ class Article extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['categoryId', 'type'], 'integer'],
+            [['categoryId', 'userId', 'type', 'status', 'sorting', 'allowComment'], 'integer'],
+            [['createTime', 'updateTime'], 'safe'],
             [['title'], 'string', 'max' => 300],
             [['keywords'], 'string', 'max' => 100],
             [['description', 'url'], 'string', 'max' => 500],
+            [['model'], 'string', 'max' => 30],
+            [['thumbnail'], 'string', 'max' => 200],
+            [['template'], 'string', 'max' => 2000],
             [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['categoryId' => 'categoryId']],
-            [['template'], 'string', 'max' => 200],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'articleId' => '文章id',
+            'articleId' => '主键自增id',
             'categoryId' => '栏目',
-            'type' => '文章类型',
+            'userId' => '发表用户',
             'title' => '标题',
-            'template' => '文章模板',
+            'type' => '文章类型',
+            'status' => '状态：1正常 0禁止显示',
             'keywords' => '关键词',
             'description' => '描述',
             'sorting' => '排序',
+            'model' => '文章模型（继承相应栏目）',
             'allowComment' => '是否允许评论，1是0否',
             'url' => '指定链接',
+            'thumbnail' => '缩略图',
             'createTime' => '创建时间',
             'updateTime' => '修改时间',
+            'template' => '使用模板，留空则使用栏目设置的模板',
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        $insert ? $this->createTime = date('Y-m-d H:i:s') : $this->updateTime = date('Y-m-d H:i:s');
+        return parent::beforeSave($insert);
+    }
+
     /**
-     * @return \db\ActiveQuery
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
      */
     public function getCategory()
     {
@@ -84,7 +100,9 @@ class Article extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @return \db\ActiveQuery
+     * Gets query for [[ArticleData]].
+     *
+     * @return \yii\db\ActiveQuery
      */
     public function getArticleData()
     {
@@ -92,7 +110,9 @@ class Article extends \xing\helper\yii\BaseActiveModel
     }
 
     /**
-     * @return \db\ActiveQuery
+     * Gets query for [[ArticleView]].
+     *
+     * @return \yii\db\ActiveQuery
      */
     public function getArticleView()
     {
@@ -112,5 +132,23 @@ class Article extends \xing\helper\yii\BaseActiveModel
     public static function readInfo($articleId)
     {
         return self::findOne($articleId);
+    }
+
+    /**
+     * 读取文章列表（用于api输出或带附表的查询输出）
+     * @param $where
+     * @param $page
+     * @param string $leftJoin
+     * @param int $pageSize
+     * @return array
+     */
+    public static function readList($where, $page, $leftJoin = '', $pageSize = 15)
+    {
+        $model = static::getModel($page, $pageSize)
+            ->from(static::tableName() . ' A')
+            ->where($where)
+            ->orderBy(['sorting' => SORT_DESC, 'articleId' => SORT_DESC]);
+        if (!empty($leftJoin)) $model->leftJoin($leftJoin);
+        return $model->asArray()->all();
     }
 }
