@@ -41,7 +41,7 @@ class CategorySearch extends Category
      */
     public function search($params)
     {
-        $query = Category::find();
+        $query = ArticleCategory::find();
         $order = [];
         if (isset($params['sort']) && !empty($params['sort'])) {
             $order = $params['sort'];

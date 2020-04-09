@@ -2,6 +2,8 @@
 
 namespace xing\article\models;
 
+use common\modules\user\UserSqcTask;
+use PHPUnit\Framework\StaticAnalysis\HappyPath\AssertNotInstanceOf\A;
 use xing\article\logic\ArticleUrlLogic;
 use Yii;
 
@@ -14,11 +16,13 @@ use Yii;
  * @property string $title 标题
  * @property int|null $type 文章类型
  * @property int|null $status 状态：1正常 0禁止显示
+ * @property int|null $voteUp 赞数量
  * @property string|null $keywords 关键词
  * @property string|null $description 描述
  * @property int|null $sorting 排序
  * @property string|null $model 文章模型（继承相应栏目）
  * @property int|null $allowComment 是否允许评论，1是0否
+ * @property int|null $commentNumber 评论数量
  * @property string|null $url 指定链接
  * @property string|null $thumbnail 缩略图
  * @property string|null $createTime 创建时间
@@ -46,7 +50,7 @@ class Article extends \xing\helper\yii\BaseActiveModel
     public function rules()
     {
         return [
-            [['categoryId', 'userId', 'type', 'status', 'sorting', 'allowComment'], 'integer'],
+            [['categoryId', 'userId', 'type', 'status', 'sorting', 'allowComment', 'recommendId', 'voteUp', 'commentNumber'], 'integer'],
             [['createTime', 'updateTime'], 'safe'],
             [['title'], 'string', 'max' => 300],
             [['keywords'], 'string', 'max' => 100],
@@ -54,7 +58,7 @@ class Article extends \xing\helper\yii\BaseActiveModel
             [['model'], 'string', 'max' => 30],
             [['thumbnail'], 'string', 'max' => 200],
             [['template'], 'string', 'max' => 2000],
-            [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['categoryId' => 'categoryId']],
+            [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleCategory::className(), 'targetAttribute' => ['categoryId' => 'categoryId']],
         ];
     }
 
@@ -64,28 +68,32 @@ class Article extends \xing\helper\yii\BaseActiveModel
     public function attributeLabels()
     {
         return [
-            'articleId' => '主键自增id',
+            'articleId' => 'id',
             'categoryId' => '栏目',
             'userId' => '发表用户',
             'title' => '标题',
             'type' => '文章类型',
-            'status' => '状态：1正常 0禁止显示',
+            'status' => '状态',
+            'voteUp' => '赞数量',
+            'recommendId' => '推荐位',
             'keywords' => '关键词',
             'description' => '描述',
             'sorting' => '排序',
-            'model' => '文章模型（继承相应栏目）',
-            'allowComment' => '是否允许评论，1是0否',
+            'model' => '文章模型',
+            'allowComment' => '允许评论',
+            'commentNumber' => '评论数量',
             'url' => '指定链接',
             'thumbnail' => '缩略图',
             'createTime' => '创建时间',
             'updateTime' => '修改时间',
-            'template' => '使用模板，留空则使用栏目设置的模板',
+            'template' => '使用模板',
         ];
     }
 
     public function beforeSave($insert)
     {
         $insert ? $this->createTime = date('Y-m-d H:i:s') : $this->updateTime = date('Y-m-d H:i:s');
+        if (is_array($this->thumbnail)) $this->thumbnail = $this->thumbnail = implode(',', $this->thumbnail);
         return parent::beforeSave($insert);
     }
 
@@ -96,7 +104,7 @@ class Article extends \xing\helper\yii\BaseActiveModel
      */
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['categoryId' => 'categoryId']);
+        return $this->hasOne(ArticleCategory::className(), ['categoryId' => 'categoryId']);
     }
 
     /**
@@ -117,6 +125,10 @@ class Article extends \xing\helper\yii\BaseActiveModel
     public function getArticleView()
     {
         return $this->hasOne(ArticleView::className(), ['articleId' => 'articleId']);
+    }
+    public function getArticleComment()
+    {
+        return $this->hasMany(ArticleComment::className(), ['articleId' => 'articleId']);
     }
 
     public function afterFind()

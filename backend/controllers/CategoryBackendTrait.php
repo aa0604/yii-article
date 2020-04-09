@@ -63,7 +63,7 @@ trait CategoryBackendTrait
     {
         $model = new ArticleCategory();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Category::updateAllChildren($model);
+            ArticleCategory::updateAllChildren($model);
             return $this->redirect(['index','parentId='. $model->parentId]);
         } else {
             return $this->render($this->viewPath . 'create', [

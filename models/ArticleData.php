@@ -43,7 +43,7 @@ class ArticleData extends \xing\helper\yii\BaseActiveModel
     public function attributeLabels()
     {
         return [
-            'articleId' => '主键id，关联article::id',
+            'articleId' => 'id',
             'content' => '文章内容',
         ];
     }

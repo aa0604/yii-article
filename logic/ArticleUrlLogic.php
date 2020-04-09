@@ -68,7 +68,7 @@ class ArticleUrlLogic
      */
     public static function categoryIdByUrl($categoryId, $page = 1, $lan = null)
     {
-        $category = Category::findOne($categoryId);
+        $category = ArticleCategory::findOne($categoryId);
         if (empty($category)) throw new \Exception('没有这个栏目');
 
         $catDir = $category->dir;

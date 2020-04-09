@@ -55,7 +55,7 @@ class ArticleLogic
     public static function getCategory($articleId)
     {
         $categoryId = Article::readInfo($articleId)->categoryId ?? null;
-        return $categoryId ? Category::findOne($categoryId) : null;
+        return $categoryId ? ArticleCategory::findOne($categoryId) : null;
     }
 
 
@@ -70,7 +70,7 @@ class ArticleLogic
     public static function getDataProvider($number = 20, $categoryId = null, $page = null)
     {
         is_null($categoryId) && $categoryId = CategoryLogic::getCurrentCategoryId();
-        $category = Category::findOne($categoryId);
+        $category = ArticleCategory::findOne($categoryId);
         if (empty($category)) throw new \Exception('栏目不存在');
 
         $whereId = explode(',', $category->childrenIds);
@@ -99,7 +99,7 @@ class ArticleLogic
      */
     public static function getList($categoryId = null, $number = 20, $sort = ['articleId' => SORT_DESC], $recommendId = null)
     {
-        $childrenIds = $categoryId ? (Category::findOne($categoryId)->childrenIds ?? null) : null;
+        $childrenIds = $categoryId ? (ArticleCategory::findOne($categoryId)->childrenIds ?? null) : null;
         empty($childrenIds) && $childrenIds = $categoryId;
         $params = ['per-page' => $number, 'sort' => $sort];
         !empty($childrenIds) && $params['categoryId'] = explode(',', $childrenIds);

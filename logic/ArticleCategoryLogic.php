@@ -22,7 +22,7 @@ class CategoryLogic
     public static function getCurrentCategoryId()
     {
         $dir = static::getCurrentCategoryDir();
-        return Category::dirByCategoryId($dir);
+        return ArticleCategory::dirByCategoryId($dir);
     }
 
     /**

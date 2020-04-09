@@ -40,11 +40,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute' => 'recommendId',
+                'value' => function($data) {
+                    return \xing\article\models\ArticleRecommend::findOne($data->recommendId)->title ?? '';
+                }
+            ],
+            [
                 'label' => '查看数量',
                 'format' => 'raw',
                 'value' => function($data) {
                     $view = \xing\article\models\ArticleView::one($data->articleId);
                     return $view->all ?? 0;
+                }
+            ],
+            'voteUp',
+            [
+                'attribute' => 'status',
+                'value' => function($data) {
+                    return \xing\article\map\ArticleMap::$status[$data->status] ?? null;
                 }
             ],
             'keywords',

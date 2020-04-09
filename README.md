@@ -87,6 +87,23 @@ php yii migrate --migrationPath=@xing/article/migrations
 ```php
 use \xing\article\backend\controllers\ArticleBaseTrait;
 ```
+##### 后台视图设置
+```php
+
+    // 全部使用自已的模板
+    public $viewPath = '模板路径，留空为正常后台路径';
+    // 仅自定义修改和创建模板
+    public function beforeAction($action)
+    {
+        parent::beforeAction($action);
+        switch ($action->id) {
+            case 'update':
+            case 'create':
+                $this->viewPath = '';
+        }
+        return true;
+    }
+```
 ##### api控制器
 ```php
 正在开发

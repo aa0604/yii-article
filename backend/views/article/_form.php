@@ -46,6 +46,9 @@ use xing\article\models\ArticleData;
 
         <?= $form->field($model, 'description')->textarea(['maxlength' => true, 'placeholder' => '描述，写不写都可以，以后程序会自动生成，不超500字']) ?>
 
+
+        <?= $form->field($model, 'thumbnail')->widget('xing\webuploader\yii2\FileInput') ?>
+
         <div class="form-group field-article-title">
             <label class="col-sm-2 control-label"><label class="control-label" for="article-title">文章内容</label></label>
             <div class="col-sm-8">
@@ -61,6 +64,8 @@ use xing\article\models\ArticleData;
         </div>
 
 
+        <?= $form->field($model, 'recommendId')
+            ->dropDownList(\xing\article\models\ArticleRecommend::dropDownList('title')) ?>
 
         <?= $form->field($model, 'type')->dropDownList([0 => '普通文章']) ?>
 

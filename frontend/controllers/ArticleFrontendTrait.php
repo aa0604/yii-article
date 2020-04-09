@@ -17,6 +17,10 @@ use xing\article\models\ArticleCategory;
 trait ArticleFrontendTrait
 {
 
+    public function showError($e)
+    {
+        throw $e;
+    }
 
     public function actionIndex()
     {
@@ -30,7 +34,7 @@ trait ArticleFrontendTrait
         try {
 
             $catDir = \xing\article\logic\CategoryLogic::getCurrentCategoryDir();
-            $category = Category::dirByCategory($catDir);
+            $category = ArticleCategory::dirByCategory($catDir);
             if (empty($category)) throw new \Exception('没有这个栏目');
 
             $template = TemplateLogic::getTemplatePath($category->categoryTemplate ?: 'lists');
@@ -50,7 +54,7 @@ trait ArticleFrontendTrait
             if (empty($article)) throw new \Exception('没有这篇文章');
 
             $catDir = \xing\article\logic\CategoryLogic::getCurrentCategoryDir();
-            $category = Category::dirByCategory($catDir);
+            $category = ArticleCategory::dirByCategory($catDir);
             if (empty($category)) throw new \Exception('没有这个栏目');
 
             $templateName = $article->template ?: $category->articleTemplate ?: 'view';

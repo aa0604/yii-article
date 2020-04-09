@@ -2,6 +2,7 @@
 
 namespace xing\article\backend\controllers;
 
+use xing\helper\text\StringHelper;
 use xing\ueditor\UEditorTrait;
 use Yii;
 use xing\article\models\Article;
@@ -15,6 +16,12 @@ trait ArticleBackendTrait
     use UEditorTrait;
 
     public $viewPath = '@vendor/xing.chen/yii-article/backend/views/article/';
+
+    public function showError($e)
+    {
+        throw $e;
+    }
+
     /**
      * @inheritdoc
      */
@@ -71,15 +78,18 @@ trait ArticleBackendTrait
 
             $db = $model::getDb()->beginTransaction();
             try {
-
-                $model->load(Yii::$app->request->post());
-                $model->createTime = date('Y-m-d H:i:s');
-                if (!$model->save()) throw new \Exception('保存失败');
-
                 $articleData = new ArticleData();
                 $articleData->load(Yii::$app->request->post());
+
+                $model->load(Yii::$app->request->post());
+                is_array($model->thumbnail) && $model->thumbnail = implode(',', $model->thumbnail);
+                $model->createTime = date('Y-m-d H:i:s');
+                $model->description = StringHelper::strCut(strip_tags($articleData->content), 500);
+                if (!$model->save()) throw new \Exception('保存失败'. implode(',', $model->getFirstErrors()));
+
                 $articleData->articleId = $model->articleId;
-                if (!$articleData->save()) throw new \Exception('保存失败');
+                if (!$articleData->save())
+                    throw new \Exception('保存失败'. implode(',', $articleData->getFirstErrors()));
 
                 $db->commit();
 
@@ -110,15 +120,17 @@ trait ArticleBackendTrait
 
             $db = $model::getDb()->beginTransaction();
             try {
-
-                $model->load(Yii::$app->request->post());
-                $model->updateTime = date('Y-m-d H:i:s');
-                if (!$model->save()) throw new \Exception('保存失败');
-
                 $articleData = ArticleData::findOne($model->articleId);
                 $articleData->load(Yii::$app->request->post());
+
+                $model->load(Yii::$app->request->post());
+                is_array($model->thumbnail) && $model->thumbnail = implode(',', $model->thumbnail);
+                $model->updateTime = date('Y-m-d H:i:s');
+                empty($model->description) && $model->description = StringHelper::strCut(strip_tags($articleData->content), 500);
+                if (!$model->save()) throw new \Exception('保存失败'. implode(',', $model->getFirstErrors()));
+
                 $articleData->articleId = $model->articleId;
-                if (!$articleData->save()) throw new \Exception('保存失败');
+                if (!$articleData->save()) throw new \Exception('保存失败'. implode(',', $articleData->getFirstErrors()));
 
                 $db->commit();
 
