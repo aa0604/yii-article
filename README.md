@@ -29,7 +29,7 @@ php yii migrate --migrationPath=@xing/article/migrations
     // 前端访问路径
     'visitDomain' => IMG_DOMAIN . 'upload/',
     // 上传url
-    'uploadUrl' => 'article/article/file-upload',
+    'uploadUrl' => 'article/file-upload/xing',
     'config' => [
         'defaultImage' => '/images/icon/upload.jpg',
         'disableGlobalDnd' => true,
