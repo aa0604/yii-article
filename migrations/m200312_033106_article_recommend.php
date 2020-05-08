@@ -33,6 +33,7 @@ class m200312_033106_article_recommend extends Migration
     public function safeDown()
     {
         echo "m200312_033106_article_recommend cannot be reverted.\n";
+        $this->dropTable($this->table);
 
         return false;
     }

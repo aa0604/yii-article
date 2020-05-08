@@ -163,4 +163,31 @@ class Article extends \xing\helper\yii\BaseActiveModel
         if (!empty($leftJoin)) $model->leftJoin($leftJoin);
         return $model->asArray()->all();
     }
+    /**
+     * 获取父栏目下所有子栏目的文章
+     * @param $categoryParentId
+     * @param int $number
+     * @return array|\yii\db\ActiveRecord[]
+     * @throws \Exception
+     */
+    public static function readCategoryArticle($categoryId, $number = 20)
+    {
+        return self::find()
+            ->where(['categoryId' => $categoryId, 'display' => 1])
+            ->select('categoryId, name')
+            ->limit($number)
+            ->orderBy(['sorting' => SORT_DESC])
+            ->all();
+    }
+
+    public static function create($userId, $categoryId, $title, $thumb)
+    {
+        $m = new self;
+        $m->userId = $userId;
+        $m->categoryId = $categoryId;
+        $m->title = $title;
+        $m->thumbnail = $thumb;
+        return $m->logicSave();
+    }
+
 }

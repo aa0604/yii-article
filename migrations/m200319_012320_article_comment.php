@@ -35,6 +35,7 @@ class m200319_012320_article_comment extends Migration
     public function safeDown()
     {
         echo "m200319_012320_article_comment cannot be reverted.\n";
+        $this->dropTable($this->table);
 
         return false;
     }
