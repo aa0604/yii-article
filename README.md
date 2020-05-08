@@ -17,7 +17,7 @@ composer require xing.chen/article
 
 #### 2、导入数据结构
 ```
-php yii migrate --migrationPath=@xing/article/migrations
+php yii migrate --migrationPath=@xing/yii-article/migrations
 ```
 
 #### 3、图片上传配置
