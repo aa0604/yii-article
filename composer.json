@@ -1,8 +1,8 @@
 {
-    "name": "xing.chen/yii-article",
+    "name": "xing.chen/article",
     "description": "文章系统",
-    "type": "yii2-extension",
     "license": "mit",
+    "type": "yii2-extension",
     "authors": [
         {
             "name": "chen xing",
@@ -11,13 +11,11 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "xing.chen/helper": "~1.0",
-        "xing.chen/yii2-ueditor": "dev-master",
-        "xing.chen/webuploader": "dev-master"
+        "xing.chen/helper": "~1.0"
     },
     "autoload": {
         "psr-4": {
-            "xing\\yii-article\\": "xing\\article"
+            "xing\\article\\": ""
         }
     }
 }
