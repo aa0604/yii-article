@@ -17,7 +17,7 @@ composer require xing.chen/article
 
 #### 2、导入数据结构
 ```
-php yii migrate --migrationPath=@xing/yii-article/migrations
+php yii migrate --migrationPath=@xing/article/migrations
 ```
 
 #### 3、图片上传配置
@@ -79,15 +79,24 @@ php yii migrate --migrationPath=@xing/yii-article/migrations
 很简单，只要在控制器中继承文章系统就可以了，随便你用什么文件夹或模块名
 
 但是前台由于涉及url输出，目前url规则是固定的
-##### 前台控制器：
+### 前台控制器：
+使用下面的代码就可以输出视图了，视图模板的位置和平常的yii开发一样
 ```php
-正在开发
+namespace 命名空间请自己根据情况加入;
+use xing\article\logic\TemplateLogic;
+use Yii;
+
+class ArticleController extends \yii\web\Controller
+{
+    use \apps\frontend\controllers\ArticleBaseController;
+
+}
 ```
-##### 后台控制器
+### 后台控制器
 ```php
 use \xing\article\backend\controllers\ArticleBaseTrait;
 ```
-##### 后台视图设置
+### 后台视图设置
 ```php
 
     // 全部使用自已的模板
@@ -103,6 +112,13 @@ use \xing\article\backend\controllers\ArticleBaseTrait;
         }
         return true;
     }
+```
+
+#### 增加管理菜到后台
+本功能需要配合xing.chen/yii-ace使用，如果您后台不是使用它，那么这一步就跳过
+```
+php yii migrate --migrationPath=@xing/article/migrations-admin-rule
+
 ```
 ##### api控制器
 ```php
