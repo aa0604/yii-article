@@ -62,7 +62,9 @@ trait CategoryBackendTrait
     public function actionCreate()
     {
         $model = new ArticleCategory();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            if (empty($_POST[$model->formName()]['url'])) $model->url = '';
+            if (!$model->save()) return $this->render($this->viewPath . 'create', ['model' => $model,]);
             ArticleCategory::updateAllChildren($model);
             return $this->redirect(['index','parentId='. $model->parentId]);
         } else {
@@ -82,7 +84,9 @@ trait CategoryBackendTrait
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            if (empty($_POST[$model->formName()]['url'])) $model->url = '';
+            if (!$model->save()) return $this->render($this->viewPath . 'create', ['model' => $model,]);
             ArticleCategory::updateAllChildren($model);
             return $this->redirect(['index','parentId='. $model->parentId]);
         } else {
@@ -110,7 +114,7 @@ trait CategoryBackendTrait
      * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Category the loaded model
+     * @return ArticleCategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

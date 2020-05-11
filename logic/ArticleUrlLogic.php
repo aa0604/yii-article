@@ -16,6 +16,7 @@ use xing\article\models\ArticleCategory;
 use xing\article\modules\site\Region;
 use xing\article\modules\site\SiteRegion;
 use xing\helper\text\ToPinYinHelper;
+use Yii;
 
 class ArticleUrlLogic
 {
@@ -51,8 +52,11 @@ class ArticleUrlLogic
             throw new \Exception('栏目目录为空');
         }
 
-        is_null($lan) && $lan = static::getByLanguage();
-        $url = '/'. $lan . '/' . $catDir;
+        if (isset(Yii::$app->params['multilingual']) && Yii::$app->params['multilingual'] && is_null($lan))
+            $lan = static::getByLanguage();
+        
+        !empty($lan) && $url .= '/'. $lan;
+        $url .= '/' . $catDir;
         // 第2页以后后面开始翻页
         $page > 1 && $url .= '/' . $page . ArticleMap::SUFFIX;
         return $url;
@@ -82,7 +86,7 @@ class ArticleUrlLogic
      */
     public static function getByLanguage()
     {
-        return \Yii::$app->request->get('lan') ?: LanguageLogic::getDefaultLanguage();
+        return Yii::$app->request->get('lan') ?: LanguageLogic::getDefaultLanguage();
     }
 
     /**

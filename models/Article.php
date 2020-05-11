@@ -29,7 +29,7 @@ use Yii;
  * @property string|null $updateTime 修改时间
  * @property string|null $template 使用模板，留空则使用栏目设置的模板
  *
- * @property Category $category
+ * @property ArticleCategory $category
  * @property ArticleData $articleData
  * @property User $author
  * @property ArticleView $articleView

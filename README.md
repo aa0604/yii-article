@@ -124,3 +124,10 @@ php yii migrate --migrationPath=@xing/article/migrations-admin-rule
 ```php
 正在开发
 ```
+
+
+### 多语言配置
+在params.php里增加以下楝
+```php
+'multilingual' => true,
+```

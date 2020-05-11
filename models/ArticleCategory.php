@@ -238,7 +238,7 @@ class ArticleCategory extends \xing\helper\yii\BaseActiveModel
      * @param int $parentId 从哪个栏目开始读取
      * @param int $number 读取数据
      * @param int $display 是否显示
-     * @return array|Category[]
+     * @return array|ArticleCategory[]
      */
     public static function readList($parentId = 0, $number = 20, $display = 1)
     {
