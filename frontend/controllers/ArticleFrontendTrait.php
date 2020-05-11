@@ -17,11 +17,6 @@ use xing\article\models\ArticleCategory;
 trait ArticleFrontendTrait
 {
 
-    public function showError($e)
-    {
-        throw $e;
-    }
-
     public function actionIndex()
     {
 
