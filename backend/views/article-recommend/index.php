@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel xing\article\models\search\ArticleRecommendSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'article Recommends';
+$this->title = '推荐位';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-recommend-index form-inline">
@@ -26,10 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'recommendId',
             'title',
-            'createTime:datetime',
-            'updateTime:datetime',
+            'createTime',
+            'updateTime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
         ],
     ]); ?>
 </div>

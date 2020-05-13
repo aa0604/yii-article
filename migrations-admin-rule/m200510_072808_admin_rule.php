@@ -42,6 +42,14 @@ class m200510_072808_admin_rule extends Migration
             'is_show'   => 1,
             'status'    => 1
         ]);
+        $this->insert($this->table, [
+            'pid'       => $r['id'],
+            'title'     => '推荐位管理',
+            'route'     => 'article/article-recommend',
+            'type'      => 1,
+            'is_show'   => 1,
+            'status'    => 1
+        ]);
     }
 
     /**

@@ -21,8 +21,8 @@ class m200312_033106_article_recommend extends Migration
         $this->createTable('article_recommend', [
             'recommendId'     => $this->primaryKey()->notNull()->comment('主键'),
             'title'     => $this->string(100)->notNull()->comment('标题'),
-            'createTime'     => $this->integer(10)->notNull()->comment('创建时间'),
-            'updateTime'     => $this->integer(10)->notNull()->comment('修改时间'),
+            'createTime'     => $this->dateTime()->comment('创建时间'),
+            'updateTime'     => $this->dateTime()->comment('修改时间'),
         ], $tableOptions);
         
         $this->addForeignKey("article_ibfk_recommendId", "article", "recommendId", "article_recommend", "recommendId", "SET NULL", "CASCADE");

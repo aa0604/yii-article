@@ -93,18 +93,23 @@ class ArticleLogic
      * 获取文章列表
      * @param $categoryId
      * @param $number
-     * @param array $sort
      * @param null $recommendId
+     * @param array $order
      * @return Article[]|array|\db\ActiveRecord[]
      */
-    public static function getList($categoryId = null, $number = 20, $sort = ['articleId' => SORT_DESC], $recommendId = null)
+    public static function getList($categoryId = null, $number = 20, $recommendId = null, $order = [])
     {
-        $childrenIds = $categoryId ? (ArticleCategory::findOne($categoryId)->childrenIds ?? null) : null;
-        empty($childrenIds) && $childrenIds = $categoryId;
-        $params = ['per-page' => $number, 'sort' => $sort];
-        !empty($childrenIds) && $params['categoryId'] = explode(',', $childrenIds);
+        $where = [];
+        if (!empty($categoryId)) {
+            $childrenIds = ArticleCategory::findOne($categoryId)->childrenIds ?? $categoryId;
+            $where['categoryId'] = explode(',', $childrenIds ?: $categoryId);
+        }
+        !empty($recommendId) && $where['recommendId'] = $recommendId;
 
-        $list = Article::getLists($params);
+        $list = Article::getModel(1, $number)
+            ->orderBy($order ? $order : ['sorting' => SORT_DESC, 'articleId' => SORT_DESC])
+            ->where($where)
+            ->all();
         return $list;
     }
 

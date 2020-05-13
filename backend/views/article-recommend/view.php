@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model xing\article\models\ArticleRecommend */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'article Recommends', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '推荐位', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-recommend-view">
