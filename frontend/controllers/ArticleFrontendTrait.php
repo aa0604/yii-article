@@ -28,7 +28,7 @@ trait ArticleFrontendTrait
     {
         try {
 
-            $catDir = \xing\article\logic\CategoryLogic::getCurrentCategoryDir();
+            $catDir = \xing\article\logic\ArticleCategoryLogic::getCurrentCategoryDir();
             $category = ArticleCategory::dirByCategory($catDir);
             if (empty($category)) throw new \Exception('没有这个栏目');
 
