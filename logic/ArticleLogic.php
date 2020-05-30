@@ -69,7 +69,7 @@ class ArticleLogic
      */
     public static function getDataProvider($number = 20, $categoryId = null, $page = null)
     {
-        is_null($categoryId) && $categoryId = CategoryLogic::getCurrentCategoryId();
+        is_null($categoryId) && $categoryId = ArticleCategoryLogic::getCurrentCategoryId();
         $category = ArticleCategory::findOne($categoryId);
         if (empty($category)) throw new \Exception('栏目不存在');
 

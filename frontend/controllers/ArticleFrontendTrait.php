@@ -48,7 +48,7 @@ trait ArticleFrontendTrait
             $article = Article::readInfo($articleId);
             if (empty($article)) throw new \Exception('没有这篇文章');
 
-            $catDir = \xing\article\logic\CategoryLogic::getCurrentCategoryDir();
+            $catDir = \xing\article\logic\ArticleCategoryLogic::getCurrentCategoryDir();
             $category = ArticleCategory::dirByCategory($catDir);
             if (empty($category)) throw new \Exception('没有这个栏目');
 
