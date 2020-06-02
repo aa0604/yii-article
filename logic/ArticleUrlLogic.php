@@ -34,8 +34,8 @@ class ArticleUrlLogic
         if (is_null($catDir)) $catDir = ArticleLogic::getCategory($articleId)->dir ?? '';
         if (empty($catDir)) throw new \Exception('文章id为'. $articleId .'的栏目目录为空，请管理员修正');
 
-        is_null($lan) && $lan = static::getByLanguage();
-        return '/'. $lan . '/' . $catDir . '/view-' . $articleId . ArticleMap::SUFFIX;
+        $lan == 'auto' && $lan = '/'. static::getByLanguage();
+        return $lan . '/' . $catDir . '/view-' . $articleId . ArticleMap::SUFFIX;
     }
 
     /**

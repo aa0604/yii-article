@@ -4,7 +4,7 @@ namespace xing\article\map;
 
 class ArticleMap
 {
-    const SUFFIX = '';
+    const SUFFIX = '.html';
     const STATUS_SHOW = '1';
     const STATUS_CLOSE = '0';
 

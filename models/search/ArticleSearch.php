@@ -79,7 +79,7 @@ class ArticleSearch extends Article
         ]);
         
         if (!empty($this->categoryId))
-            $query->andWhere(['categoryId' => ArticleCategory::readAllChildren($this->categoryId)]);
+            $query->andWhere(['categoryId' => ArticleCategory::readAllChildren($this->categoryId) ?: $this->categoryId]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);
 

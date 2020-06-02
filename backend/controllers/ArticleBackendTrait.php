@@ -18,6 +18,24 @@ trait ArticleBackendTrait
     public $viewPath = '@xing/article/backend/views/article/';
 
 
+
+    /**
+     * @param \Exception $e
+     */
+    public function showError($e)
+    {
+        if (YII_DEBUG) {
+            throw $e;
+        } else {
+            exit($e->getMessage());
+        }
+    }
+
+    public function actionError()
+    {
+        exit('出错了');
+    }
+    
     /**
      * @inheritdoc
      */
