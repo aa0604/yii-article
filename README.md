@@ -12,7 +12,7 @@ api：文章列表、内容获取、栏目获取
 # 安装
 #### 1、获取扩展插件
 ```
-composer require xing.chen/article
+composer require xing.chen/yii-article
 ```
 
 #### 2、导入数据结构
@@ -127,7 +127,7 @@ php yii migrate --migrationPath=@xing/article/migrations-admin-rule
 
 
 ### 多语言配置
-在params.php里增加以下楝
+在params.php里增加以下参数以启用多语言
 ```php
 'multilingual' => true,
 ```
