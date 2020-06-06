@@ -163,4 +163,22 @@ class Article extends \xing\helper\yii\BaseActiveModel
         if (!empty($leftJoin)) $model->leftJoin($leftJoin);
         return $model->asArray()->all();
     }
+
+
+    /**
+     * 增加文章
+     * @param $categoryId
+     * @param $title
+     * @param $thumb
+     * @return Article
+     * @throws \xing\helper\exception\ModelYiiException
+     */
+    public static function create($categoryId, $title, $thumb)
+    {
+        $m = new self;
+        $m->categoryId = $categoryId;
+        $m->title = $title;
+        $m->thumbnail = $thumb;
+        return $m->logicSave();
+    }
 }
