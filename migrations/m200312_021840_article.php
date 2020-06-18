@@ -32,11 +32,14 @@ class m200312_021840_article extends Migration
             'allowComment'     => $this->tinyInteger(1)->comment('是否允许评论'),
             'commentNumber'     => $this->integer(1)->comment('评论数量'),
             'recommendId'       => $this->integer(11)->comment('推荐位'),
-            'url'     => $this->string(500)->notNull()->comment('指定链接'),
+            'url'     => $this->string(500)->comment('指定链接'),
             'thumbnail'     => $this->string(200)->comment('缩略图'),
             'createTime'     => $this->datetime()->comment('创建时间'),
             'updateTime'     => $this->datetime()->comment('修改时间'),
-            'template'     => $this->string(2000)->notNull()->comment('使用模板'),
+            'template'     => $this->string(2000)->comment('使用模板'),
+            'field1'     => $this->string(500)->comment('预留字段1'),
+            'field2'     => $this->string(500)->comment('预留字段2'),
+            'field3'     => $this->string(500)->comment('预留字段3'),
         ], $tableOptions);
         
 
