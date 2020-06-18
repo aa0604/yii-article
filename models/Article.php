@@ -28,6 +28,9 @@ use Yii;
  * @property string|null $createTime 创建时间
  * @property string|null $updateTime 修改时间
  * @property string|null $template 使用模板，留空则使用栏目设置的模板
+ * @property string|null $field1 预留字段1
+ * @property string|null $field2 预留字段2
+ * @property string|null $field3 预留字段3
  *
  * @property ArticleCategory $category
  * @property ArticleData $articleData
@@ -54,7 +57,7 @@ class Article extends \xing\helper\yii\BaseActiveModel
             [['createTime', 'updateTime'], 'safe'],
             [['title'], 'string', 'max' => 300],
             [['keywords'], 'string', 'max' => 100],
-            [['description', 'url'], 'string', 'max' => 500],
+            [['description', 'url', 'field1', 'field2', 'field3'], 'string', 'max' => 500],
             [['model'], 'string', 'max' => 30],
             [['thumbnail'], 'string', 'max' => 200],
             [['template'], 'string', 'max' => 2000],
@@ -87,6 +90,9 @@ class Article extends \xing\helper\yii\BaseActiveModel
             'createTime' => '创建时间',
             'updateTime' => '修改时间',
             'template' => '使用模板',
+            'field1' => '预留字段1',
+            'field2' => '预留字段2',
+            'field3' => '预留字段3',
         ];
     }
 
@@ -169,16 +175,19 @@ class Article extends \xing\helper\yii\BaseActiveModel
      * 增加文章
      * @param $categoryId
      * @param $title
-     * @param $thumb
+     * @param $keywords
+     * @param null $description
+     * @param null $thumb
      * @return Article
      * @throws \xing\helper\exception\ModelYiiException
      */
-    public static function create($categoryId, $title, $thumb)
+    public static function create($categoryId, $title, $keywords, $description = null, $thumb = null)
     {
         $m = new self;
         $m->categoryId = $categoryId;
         $m->title = $title;
         $m->thumbnail = $thumb;
+        $m->description = $description;
         return $m->logicSave();
     }
 }
