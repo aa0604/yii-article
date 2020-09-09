@@ -20,6 +20,17 @@ use Yii;
 
 class ArticleUrlLogic
 {
+    /**
+     * 返回文件访问网址
+     * @param $filePath
+     * @return string
+     */
+    public function fileUrl($relativePath)
+    {
+        if (empty($relativePath)) return $relativePath;
+        $domain = Yii::$app->params['xingUploader']['visitDomain'] ?? '/';
+        return preg_match('/:\/\//', $relativePath) ? $relativePath : $domain . $relativePath;
+    }
 
     /**
      * 获取文章url
@@ -54,7 +65,8 @@ class ArticleUrlLogic
 
         if (isset(Yii::$app->params['multilingual']) && Yii::$app->params['multilingual'] && is_null($lan))
             $lan = static::getByLanguage();
-        
+
+        $url = '';
         !empty($lan) && $url .= '/'. $lan;
         $url .= '/' . $catDir;
         // 第2页以后后面开始翻页

@@ -22,7 +22,7 @@ php yii migrate --migrationPath=@xing/article/migrations
 
 #### 3、图片上传配置
 ##### 单/多文件上传控件配置
-将以下配置复制插入至 params.php
+将以下配置复制插入至common/config/params.php
 （插件地址：https://packagist.org/packages/xing.chen/webuploader)
 ```php
 'xingUploader' => [
@@ -43,6 +43,15 @@ php yii migrate --migrationPath=@xing/article/migrations
         ],
     ],
 ]
+```
+##### 3、配置模块到main.php
+```php
+
+    'modules' => [
+        'article' => [
+            'class' => 'xing\article\backend\Module',
+        ],
+    ],
 ```
 ##### 文件上传配置
 （插件地址：https://packagist.org/packages/xing.chen/upload）

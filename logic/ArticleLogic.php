@@ -9,6 +9,7 @@
 namespace xing\article\logic;
 
 
+use xing\article\models\ArticleData;
 use xing\helper\exception\ModelYiiException;
 use xing\article\models\Article;
 use xing\article\models\ArticleCategory;
@@ -20,6 +21,22 @@ use Yii;
 class ArticleLogic
 {
 
+    public static function create($categoryId, $title, $content, $keywords, $thumb = null)
+    {
+
+        $db = Article::getDb()->beginTransaction();
+        try {
+
+            $description = StringHelper::strCut(strip_tags($content), 500);
+            $article = Article::create($categoryId, $title, $keywords, $description, $thumb);
+            ArticleData::create($article->articleId, $content);
+            $db->commit();
+            return $article;
+        } catch (\Exception $e) {
+            $db->rollBack();
+            throw $e;
+        }
+    }
     /**
      * @param $articleId
      * @param null $categoryId
@@ -95,9 +112,10 @@ class ArticleLogic
      * @param $number
      * @param null $recommendId
      * @param array $order
+     * @param int $page
      * @return Article[]|array|\db\ActiveRecord[]
      */
-    public static function getList($categoryId = null, $number = 20, $recommendId = null, $order = [])
+    public static function getList($categoryId = null, $number = 20, $recommendId = null, $order = [], $page = 1)
     {
         $where = [];
         if (!empty($categoryId)) {
@@ -106,7 +124,7 @@ class ArticleLogic
         }
         !empty($recommendId) && $where['recommendId'] = $recommendId;
 
-        $list = Article::getModel(1, $number)
+        $list = Article::getModel($page, $number)
             ->orderBy($order ? $order : ['sorting' => SORT_DESC, 'articleId' => SORT_DESC])
             ->where($where)
             ->all();
