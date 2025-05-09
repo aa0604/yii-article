@@ -11,7 +11,7 @@ namespace xing\article\logic;
 use xing\article\models\ArticleCategory;
 use Yii;
 
-class CategoryLogic
+class ArticleCategoryLogic
 {
 
     /**
@@ -35,5 +35,17 @@ class CategoryLogic
         $category = Yii::$app->request->get('dir') ?: preg_replace('/(.*)\//', '', $_SERVER['REDIRECT_URL']);
         if (empty($category)) throw new \Exception('没有这个栏目');
         return $category;
+    }
+
+    public static function getCategoryPath($categoryId)
+    {
+        $list = [];
+        $nnn = 0;
+        do {
+            $category = ArticleCategory::findOne($category->parentId ?? $categoryId);
+            if (empty($category->parentId)) break;
+            $list[] = $category->toArray();
+        } while (++ $nnn < 100);
+        return $list;
     }
 }
