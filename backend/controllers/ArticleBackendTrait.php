@@ -15,13 +15,27 @@ trait ArticleBackendTrait
 {
     use UEditorTrait;
 
-    public $viewPath = '@vendor/xing.chen/yii-article/backend/views/article/';
+    public $viewPath = '@xing/article/backend/views/article/';
 
+
+
+    /**
+     * @param \Exception $e
+     */
     public function showError($e)
     {
-        throw $e;
+        if (YII_DEBUG) {
+            throw $e;
+        } else {
+            exit($e->getMessage());
+        }
     }
 
+    public function actionError()
+    {
+        exit('出错了');
+    }
+    
     /**
      * @inheritdoc
      */

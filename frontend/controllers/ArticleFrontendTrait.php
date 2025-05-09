@@ -16,11 +16,7 @@ use xing\article\models\ArticleCategory;
 
 trait ArticleFrontendTrait
 {
-
-    public function showError($e)
-    {
-        throw $e;
-    }
+    public $title;
 
     public function actionIndex()
     {
@@ -33,11 +29,15 @@ trait ArticleFrontendTrait
     {
         try {
 
-            $catDir = \xing\article\logic\CategoryLogic::getCurrentCategoryDir();
+            $catDir = \xing\article\logic\ArticleCategoryLogic::getCurrentCategoryDir();
             $category = ArticleCategory::dirByCategory($catDir);
             if (empty($category)) throw new \Exception('没有这个栏目');
 
             $template = TemplateLogic::getTemplatePath($category->categoryTemplate ?: 'lists');
+
+            Yii::$app->view->title = $category->title ?: $category->name;
+            Yii::$app->view->registerMetaTag(["name" => "keywords", "content" => $category->keywords]);
+            Yii::$app->view->registerMetaTag(["name" => "description", "content" => $category->description]);
 
             return $this->render($template, ['category' => $category, 'catDir' => $catDir]);
         } catch (\Exception $e) {
@@ -53,12 +53,16 @@ trait ArticleFrontendTrait
             $article = Article::readInfo($articleId);
             if (empty($article)) throw new \Exception('没有这篇文章');
 
-            $catDir = \xing\article\logic\CategoryLogic::getCurrentCategoryDir();
+            $catDir = \xing\article\logic\ArticleCategoryLogic::getCurrentCategoryDir();
             $category = ArticleCategory::dirByCategory($catDir);
             if (empty($category)) throw new \Exception('没有这个栏目');
 
             $templateName = $article->template ?: $category->articleTemplate ?: 'view';
             $template = TemplateLogic::getTemplatePath($templateName);
+
+            Yii::$app->view->title = $article->title;
+            Yii::$app->view->registerMetaTag(["name" => "keywords", "content" => $article->keywords]);
+            Yii::$app->view->registerMetaTag(["name" => "description", "content" => $article->description]);
 
             return $this->render($template, ['catDir' => $catDir, 'article' => $article]);
         } catch (\Exception $e) {

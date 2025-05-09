@@ -30,6 +30,7 @@ class m200312_033045_article_data extends Migration
     public function safeDown()
     {
         echo "m200312_033045_article_data cannot be reverted.\n";
+        $this->dropTable($this->table);
 
         return false;
     }

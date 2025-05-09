@@ -13,6 +13,9 @@ use Yii;
  * @property string $name 栏目名称
  * @property int $parentId 栏目上级id
  * @property string $childrenIds 子id
+ * @property string $title 网页标题
+ * @property string $keywords 关键词
+ * @property string $description 描述
  * @property string $model 文章模型
  * @property string $url 指定链接
  * @property string $image 栏目图片
@@ -50,8 +53,9 @@ class ArticleCategory extends \xing\helper\yii\BaseActiveModel
             [['name'], 'string', 'max' => 300],
             [['url'], 'string', 'max' => 500],
             [['childrenIds'], 'string', 'max' => 10000],
-            [['image'], 'string', 'max' => 200],
+            [['image', 'title', 'keywords'], 'string', 'max' => 200],
             [['dir'], 'string', 'max' => 20],
+            [['description'], 'string', 'max' => 3000],
             [['model'], 'string', 'max' => 30],
             [['categoryTemplate', 'articleTemplate'], 'string', 'max' => 200],
             ['parentId', 'default', 'value' => 0],
@@ -72,6 +76,9 @@ class ArticleCategory extends \xing\helper\yii\BaseActiveModel
             'categoryTemplate' => '栏目模板',
             'articleTemplate' => '文章模板',
             'childrenIds' => '子id',
+            'title' => '标题',
+            'keywords' => '关键词',
+            'description' => '描述',
             'model' => '文章模型',
             'url' => '指定链接',
             'image' => '栏目图片',
@@ -238,7 +245,7 @@ class ArticleCategory extends \xing\helper\yii\BaseActiveModel
      * @param int $parentId 从哪个栏目开始读取
      * @param int $number 读取数据
      * @param int $display 是否显示
-     * @return array|Category[]
+     * @return array|ArticleCategory[]
      */
     public static function readList($parentId = 0, $number = 20, $display = 1)
     {

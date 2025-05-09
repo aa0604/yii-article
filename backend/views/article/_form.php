@@ -73,6 +73,9 @@ use xing\article\models\ArticleData;
 
         <?= $form->field($model, 'allowComment')->dropDownList([1 => '是', 0 => '否']) ?>
 
+        <?= $form->field($model, 'field1') ?>
+        <?= $form->field($model, 'field2') ?>
+        <?= $form->field($model, 'field3') ?>
 
         <div class="form-group text-center">
             <?= Html::submitButton('提交', ['class' => 'btn btn-success']) ?>

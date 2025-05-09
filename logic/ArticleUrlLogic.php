@@ -16,9 +16,21 @@ use xing\article\models\ArticleCategory;
 use xing\article\modules\site\Region;
 use xing\article\modules\site\SiteRegion;
 use xing\helper\text\ToPinYinHelper;
+use Yii;
 
 class ArticleUrlLogic
 {
+    /**
+     * 返回文件访问网址
+     * @param $filePath
+     * @return string
+     */
+    public function fileUrl($relativePath)
+    {
+        if (empty($relativePath)) return $relativePath;
+        $domain = Yii::$app->params['xingUploader']['visitDomain'] ?? '/';
+        return preg_match('/:\/\//', $relativePath) ? $relativePath : $domain . $relativePath;
+    }
 
     /**
      * 获取文章url
@@ -33,8 +45,8 @@ class ArticleUrlLogic
         if (is_null($catDir)) $catDir = ArticleLogic::getCategory($articleId)->dir ?? '';
         if (empty($catDir)) throw new \Exception('文章id为'. $articleId .'的栏目目录为空，请管理员修正');
 
-        is_null($lan) && $lan = static::getByLanguage();
-        return '/'. $lan . '/' . $catDir . '/view-' . $articleId . ArticleMap::SUFFIX;
+        $lan == 'auto' && $lan = '/'. static::getByLanguage();
+        return $lan . '/' . $catDir . '/view-' . $articleId . ArticleMap::SUFFIX;
     }
 
     /**
@@ -51,8 +63,12 @@ class ArticleUrlLogic
             throw new \Exception('栏目目录为空');
         }
 
-        is_null($lan) && $lan = static::getByLanguage();
-        $url = '/'. $lan . '/' . $catDir;
+        if (isset(Yii::$app->params['multilingual']) && Yii::$app->params['multilingual'] && is_null($lan))
+            $lan = static::getByLanguage();
+
+        $url = '';
+        !empty($lan) && $url .= '/'. $lan;
+        $url .= '/' . $catDir;
         // 第2页以后后面开始翻页
         $page > 1 && $url .= '/' . $page . ArticleMap::SUFFIX;
         return $url;
@@ -82,7 +98,7 @@ class ArticleUrlLogic
      */
     public static function getByLanguage()
     {
-        return \Yii::$app->request->get('lan') ?: LanguageLogic::getDefaultLanguage();
+        return Yii::$app->request->get('lan') ?: LanguageLogic::getDefaultLanguage();
     }
 
     /**

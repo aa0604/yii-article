@@ -30,7 +30,7 @@ class ArticleRecommend extends \xing\helper\yii\BaseActiveModel
     {
         return [
             [['title'], 'required'],
-            [['createTime', 'updateTime'], 'integer'],
+            [['createTime', 'updateTime'], 'safe'],
             [['title'], 'string', 'max' => 100],
         ];
     }
@@ -46,5 +46,12 @@ class ArticleRecommend extends \xing\helper\yii\BaseActiveModel
             'createTime' => '创建时间',
             'updateTime' => '修改时间',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($insert) $this->createTime = date('Y-m-d H:i:s');
+        else $this->updateTime = date('Y-m-d H:i:s');
+        return parent::beforeSave($insert);
     }
 }

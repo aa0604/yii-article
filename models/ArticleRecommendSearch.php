@@ -1,17 +1,16 @@
 <?php
 
-namespace xing\article\models\search;
+namespace xing\article\models;
 
-use xing\article\models\ArticleCategory;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use xing\article\models\Article;
+use xing\article\models\ArticleRecommend;
 
 /**
- * ArticleSearch represents the model behind the search form of `xing\article\models\Article`.
+ * ArticleRecommendSearch represents the model behind the search form of `\xing\article\models\ArticleRecommend`.
  */
-class ArticleSearch extends Article
+class ArticleRecommendSearch extends ArticleRecommend
 {
     /**
      * @inheritdoc
@@ -19,8 +18,8 @@ class ArticleSearch extends Article
     public function rules()
     {
         return [
-            [['articleId', 'categoryId', 'sorting', 'allowComment', 'createTime', 'updateTime', 'status'], 'integer'],
-            [['type', 'title', 'content'], 'safe'],
+            [['recommendId', 'createTime', 'updateTime'], 'integer'],
+            [['title'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class ArticleSearch extends Article
      */
     public function search($params)
     {
-        $query = Article::find();
+        $query = ArticleRecommend::find();
         $order = [];
         if (isset($params['sort']) && !empty($params['sort'])) {
             $order = $params['sort'];
@@ -69,17 +68,10 @@ class ArticleSearch extends Article
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'articleId' => $this->articleId,
-            'type' => $this->type,
-            'sorting' => $this->sorting,
-            'allowComment' => $this->allowComment,
+            'recommendId' => $this->recommendId,
             'createTime' => $this->createTime,
             'updateTime' => $this->updateTime,
-            'status' => $this->status,
         ]);
-        
-        if (!empty($this->categoryId))
-            $query->andWhere(['categoryId' => ArticleCategory::readAllChildren($this->categoryId) ?: $this->categoryId]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);
 

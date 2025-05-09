@@ -25,7 +25,6 @@ class m200319_012320_article_comment extends Migration
             'parentId'     => $this->integer(11)->notNull()->comment('评论父id'),
             'status'     => $this->integer(1)->defaultValue(1)->comment('状态'),
             'content'     => $this->string(1500)->notNull()->comment('内容'),
-            'createTime' => $this->dateTime()->comment('创建暗井'),
         ], $tableOptions);
 
     }
@@ -36,6 +35,7 @@ class m200319_012320_article_comment extends Migration
     public function safeDown()
     {
         echo "m200319_012320_article_comment cannot be reverted.\n";
+        $this->dropTable($this->table);
 
         return false;
     }

@@ -23,9 +23,6 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'createTime')->textInput() ?>
-
-    <?= $form->field($model, 'updateTime')->textInput() ?>
 
         <div class="form-group text-center">
             <?= Html::submitButton('提交', ['class' => 'btn btn-success']) ?>

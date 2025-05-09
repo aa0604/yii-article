@@ -32,8 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=Html::a($name, ['/article/article/index', 'ArticleSearch' => ['categoryId' => $categoryId]])?>
             </td>
             <td>
-                <a href="/article/article-category/update?id=<?=$categoryId?>" title="更新" aria-label="更新" data-pjax="0"></a>
-                <a href="/article/article-category/delete?id=<?=$categoryId?>" title="删除" aria-label="删除" data-pjax="0" data-confirm="您确定要删除此项吗？" data-method="post"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="update?id=<?=$categoryId?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="delete?id=<?=$categoryId?>" title="删除" aria-label="删除" data-pjax="0" data-confirm="您确定要删除此项吗？" data-method="post"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
         <?php }?>
